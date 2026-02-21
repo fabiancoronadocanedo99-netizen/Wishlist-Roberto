@@ -8,7 +8,3 @@ export const routing = defineRouting({
 
 export const middleware = createMiddleware(routing);
 
-export const config = {
-    // Match only internationalized pathnames
-    matcher: ['/', '/(es|it)/:path*']
-};

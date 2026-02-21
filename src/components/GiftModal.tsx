@@ -11,6 +11,9 @@ interface GiftModalProps {
 
 export default function GiftModal({ isOpen, onClose, product }: GiftModalProps) {
     const [currency, setCurrency] = useState('MXN');
+    const [donorName, setDonorName] = useState('');
+    const [donorEmail, setDonorEmail] = useState('');
+    const [dedication, setDedication] = useState('');
     const [loading, setLoading] = useState(false);
 
     if (!isOpen || !product) return null;
@@ -18,11 +21,33 @@ export default function GiftModal({ isOpen, onClose, product }: GiftModalProps) 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        // TODO: Connect to Stripe Checkout Route
-        setTimeout(() => {
+        try {
+            const res = await fetch('/api/stripe/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    productId: product.id,
+                    donorName,
+                    donorEmail,
+                    dedication,
+                    currency,
+                    amount: currency === 'MXN' ? product.price_mxn : currency === 'USD' ? product.price_usd : product.price_eur,
+                }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert(data.error || 'Failed to create checkout session');
+                setLoading(false);
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Hubo un error de conexión');
             setLoading(false);
-            alert('Checkout Stripe irá aquí');
-        }, 1000);
+        }
     };
 
     return (
@@ -73,17 +98,17 @@ export default function GiftModal({ isOpen, onClose, product }: GiftModalProps) 
 
                         <div>
                             <label className="block text-sm text-white/60 mb-1">Tu Nombre</label>
-                            <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)]" />
+                            <input required type="text" value={donorName} onChange={e => setDonorName(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)]" />
                         </div>
 
                         <div>
                             <label className="block text-sm text-white/60 mb-1">Tu Correo</label>
-                            <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)]" />
+                            <input required type="email" value={donorEmail} onChange={e => setDonorEmail(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)]" />
                         </div>
 
                         <div>
                             <label className="block text-sm text-white/60 mb-1">Dedicatoria para Roberto</label>
-                            <textarea rows={3} className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)] resize-none" placeholder="Unas palabras de cariño..."></textarea>
+                            <textarea rows={3} value={dedication} onChange={e => setDedication(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[var(--color-liturgic-gold)] resize-none" placeholder="Unas palabras de cariño..."></textarea>
                         </div>
 
                         <button

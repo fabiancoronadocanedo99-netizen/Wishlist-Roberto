@@ -22,8 +22,19 @@ export default function HeroVideo() {
             {/* Background Overlay */}
             <div className="absolute inset-0 bg-black/60 z-10"></div>
 
+            {/* Video Background */}
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0"
+            >
+                <source src="/video/hero.mp4" type="video/mp4" />
+            </video>
+
             {/* Fallback pattern if video is missing */}
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,#0a0a0f_0%,#1a1528_50%,#0d1117_100%)] z-0"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,#0a0a0f_0%,#1a1528_50%,#0d1117_100%)] z-[-1]"></div>
 
             <div className="relative z-20 text-center px-4">
                 <motion.h1
