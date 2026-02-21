@@ -8,7 +8,7 @@ import GiftModal from '@/components/GiftModal';
 
 const MOCK_PRODUCTS = [
     {
-        id: '1',
+        id: 'ff4897f4-d3b7-41af-9ca8-6a00f1e12de6',
         name: 'Cáliz de Ordenación',
         description: 'Cáliz principal bañado en oro con detalles litúrgicos grabados a mano, esencial para la Eucaristía.',
         price_mxn: 5000,
@@ -19,7 +19,7 @@ const MOCK_PRODUCTS = [
         image_url: ''
     },
     {
-        id: '2',
+        id: 'f058f9fa-2430-4895-af0e-1bb9375bf3d5',
         name: 'Casulla Sacerdotal Blanca',
         description: 'Vestimenta sagrada de alta calidad para las celebraciones solemnes, con bordados dorados.',
         price_mxn: 3000,
@@ -30,7 +30,7 @@ const MOCK_PRODUCTS = [
         image_url: ''
     },
     {
-        id: '3',
+        id: '1be1d684-5f57-42bb-a1c7-946aaaa7fe82',
         name: 'Copón Grande',
         description: 'Vaso sagrado para la reserva de la Eucaristía, haciendo juego con el cáliz de ordenación.',
         price_mxn: 2500,

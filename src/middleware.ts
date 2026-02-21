@@ -1,5 +1,6 @@
 export { middleware } from './routing';
 
 export const config = {
-    matcher: ['/', '/(es|it)/:path*']
+    // Match only internationalized pathnames
+    matcher: ['/', '/(es|it)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
 };
