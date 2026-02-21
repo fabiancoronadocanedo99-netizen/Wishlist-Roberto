@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-liquid-dark: #0a0a0f;
+  --color-liquid-purple: #1a1528;
+  --color-liquid-base: #0d1117;
+  --color-liturgic-gold: #c9a96e;
+}
+
+:root {
+  --background: var(--color-liquid-dark);
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: linear-gradient(135deg, var(--color-liquid-dark) 0%, var(--color-liquid-purple) 50%, var(--color-liquid-base) 100%);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-attachment: fixed;
+}
+
+.glass-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}

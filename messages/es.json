@@ -1,0 +1,25 @@
+{
+    "Index": {
+        "title": "Wishlist Roberto Allison Coronado",
+        "daysLeft": "{days} días para la gran noche",
+        "goal": "{funded} de {needed} donados"
+    },
+    "Modal": {
+        "title": "Un Regalo Especial",
+        "subtitle": "Selecciona la moneda y escribe una dedicatoria",
+        "donorName": "Nombre",
+        "donorEmail": "Correo electrónico",
+        "dedication": "Mensaje para Roberto",
+        "amount": "Monto",
+        "currency": "Moneda",
+        "donateNow": "Donar Ahora",
+        "success": "¡Gracias por tu regalo!",
+        "error": "Hubo un error al procesar tu regalo. Intenta nuevamente."
+    },
+    "Admin": {
+        "title": "Panel de Administración",
+        "totalRaised": "Total Recaudado",
+        "latestDonations": "Últimas Donaciones",
+        "productsTitle": "Gestión de Wishlist"
+    }
+}
