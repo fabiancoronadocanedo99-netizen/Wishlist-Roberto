@@ -1,74 +1,28 @@
-'use client';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-import { useTranslations } from 'next-intl';
-import HeroVideo from '@/components/HeroVideo';
-import WishlistGrid from '@/components/WishlistGrid';
-import React, { useState } from 'react';
-import GiftModal from '@/components/GiftModal';
+import { createClient } from '@/lib/supabaseServer';
+import HomeClient from '@/components/HomeClient';
+import { getTranslations } from 'next-intl/server';
 
-const MOCK_PRODUCTS = [
-    {
-        id: 'ff4897f4-d3b7-41af-9ca8-6a00f1e12de6',
-        name: 'Cáliz de Ordenación',
-        description: 'Cáliz principal bañado en oro con detalles litúrgicos grabados a mano, esencial para la Eucaristía.',
-        price_mxn: 5000,
-        price_usd: 250,
-        price_eur: 230,
-        quantity_needed: 10,
-        quantity_funded: 3,
-        image_url: ''
-    },
-    {
-        id: 'f058f9fa-2430-4895-af0e-1bb9375bf3d5',
-        name: 'Casulla Sacerdotal Blanca',
-        description: 'Vestimenta sagrada de alta calidad para las celebraciones solemnes, con bordados dorados.',
-        price_mxn: 3000,
-        price_usd: 150,
-        price_eur: 140,
-        quantity_needed: 5,
-        quantity_funded: 5,
-        image_url: ''
-    },
-    {
-        id: '1be1d684-5f57-42bb-a1c7-946aaaa7fe82',
-        name: 'Copón Grande',
-        description: 'Vaso sagrado para la reserva de la Eucaristía, haciendo juego con el cáliz de ordenación.',
-        price_mxn: 2500,
-        price_usd: 125,
-        price_eur: 115,
-        quantity_needed: 5,
-        quantity_funded: 2,
-        image_url: ''
-    }
-];
+export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
+    const params = await props.params;
+    const { locale } = params;
 
-export default function HomePage() {
-    const t = useTranslations('Index');
-    const [selectedProduct, setSelectedProduct] = useState<any>(null);
+    const supabase = await createClient();
+    const { data: rawProducts } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+    // Map fields so the grid component gets 'name' and 'description' correctly mapped to the locale
+    const mappedProducts = (rawProducts || []).map((p: any) => ({
+        ...p,
+        name: locale === 'it' && p.name_it ? p.name_it : p.name_es,
+        description: locale === 'it' && p.description_it ? p.description_it : p.description_es
+    }));
 
     return (
-        <main className="min-h-screen bg-[var(--background)]">
-            <HeroVideo />
-
-            <div className="py-12">
-                <h2 className="text-4xl text-center font-bold text-[var(--color-liturgic-gold)] tracking-wide uppercase mb-2">
-                    La Lista de Regalos
-                </h2>
-                <p className="text-center text-white/60 mb-8 max-w-2xl mx-auto px-4">
-                    Cada aporte nos acerca más a la meta. Elige el artículo con el que deseas contribuir al ministerio sacerdotal de Roberto.
-                </p>
-
-                <WishlistGrid
-                    products={MOCK_PRODUCTS as any}
-                    onSelectProduct={setSelectedProduct}
-                />
-            </div>
-
-            <GiftModal
-                isOpen={!!selectedProduct}
-                onClose={() => setSelectedProduct(null)}
-                product={selectedProduct}
-            />
-        </main>
+        <HomeClient products={mappedProducts} />
     );
 }
