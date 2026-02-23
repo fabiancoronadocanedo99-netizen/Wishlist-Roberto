@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabaseServer';
 import { redirect } from 'next/navigation';
+import ProductManager from '@/components/admin/ProductManager';
 
 export default async function AdminDashboardPage() {
     const supabase = await createClient();
@@ -16,6 +17,12 @@ export default async function AdminDashboardPage() {
       *,
       products ( name_es )
     `)
+        .order('created_at', { ascending: false });
+
+    // Fetch Products
+    const { data: products } = await supabase
+        .from('products')
+        .select('*')
         .order('created_at', { ascending: false });
 
     // Calculate Totals manually per currency
@@ -87,6 +94,8 @@ export default async function AdminDashboardPage() {
                     </table>
                 </div>
             </div>
+
+            <ProductManager initialProducts={products as any} />
         </main>
     );
 }
