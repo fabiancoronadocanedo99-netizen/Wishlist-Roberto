@@ -6,7 +6,8 @@ export default async function AdminDashboardPage() {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
-    if (!user || user.email !== process.env.BENEFICIARY_EMAIL) {
+    const authorizedEmails = (process.env.BENEFICIARY_EMAIL || '').split(',').map(e => e.trim());
+    if (!user || user.email == null || !authorizedEmails.includes(user.email)) {
         redirect('/admin/login');
     }
 

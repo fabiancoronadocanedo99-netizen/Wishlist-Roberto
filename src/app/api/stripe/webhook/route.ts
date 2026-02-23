@@ -63,9 +63,10 @@ export async function POST(req: Request) {
                 }
 
                 // 3. Send Notification Email via Resend
+                const adminEmails = (process.env.BENEFICIARY_EMAIL || '').split(',').map(e => e.trim()).filter(Boolean);
                 await resend.emails.send({
                     from: 'Wishlist Roberto <onboarding@resend.dev>', // Update for production verified domain
-                    to: [process.env.BENEFICIARY_EMAIL!, metadata.donorEmail],
+                    to: [...adminEmails, metadata.donorEmail],
                     subject: `¡Nuevo Padrino para: ${product?.name_es}!`,
                     html: `
             <div style="font-family: sans-serif; color: #333;">

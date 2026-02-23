@@ -41,7 +41,8 @@ export async function updateSession(request: NextRequest) {
             url.pathname = '/es/admin/login'
             return NextResponse.redirect(url)
         }
-        if (user.email !== process.env.BENEFICIARY_EMAIL) {
+        const authorizedEmails = (process.env.BENEFICIARY_EMAIL || '').split(',').map(e => e.trim());
+        if (!user.email || !authorizedEmails.includes(user.email)) {
             const url = request.nextUrl.clone()
             url.pathname = '/es/'
             return NextResponse.redirect(url)
