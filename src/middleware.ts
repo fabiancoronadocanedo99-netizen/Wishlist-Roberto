@@ -6,6 +6,11 @@ export async function middleware(request: NextRequest) {
     // First, check auth and refresh token if needed
     const supabaseResponse = await updateSession(request);
 
+    // Skip i18n for auth callbacks
+    if (request.nextUrl.pathname.startsWith('/auth')) {
+        return supabaseResponse;
+    }
+
     // Apply i18n routing logic
     const response = intlMiddleware(request);
 
