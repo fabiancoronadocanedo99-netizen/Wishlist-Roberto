@@ -171,9 +171,9 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {products.map(product => (
                     <div key={product.id} className="glass-card p-4 flex flex-col group">
-                        <div className="relative h-40 w-full mb-4 bg-black/30 rounded overflow-hidden">
+                        <div className="relative aspect-[3/4] w-full mb-4 bg-black/30 rounded overflow-hidden">
                             {product.image_url ? (
-                                <Image src={product.image_url} alt={product.name_es} fill className="object-cover" />
+                                <Image src={product.image_url} alt={product.name_es} fill className="object-cover object-center" />
                             ) : (
                                 <div className="absolute inset-0 flex items-center justify-center text-white/20">Sin imagen</div>
                             )}

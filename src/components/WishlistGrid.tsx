@@ -33,13 +33,13 @@ export default function WishlistGrid({ products, onSelectProduct }: WishlistGrid
                         transition={{ delay: idx * 0.1, duration: 0.5 }}
                         className={`glass-card overflow-hidden flex flex-col group ${isComplete ? 'opacity-60' : ''}`}
                     >
-                        <div className="relative h-64 w-full bg-black/20">
+                        <div className="relative aspect-[3/4] w-full bg-black/20">
                             {product.image_url ? (
                                 <Image
                                     src={product.image_url}
                                     alt={product.name}
                                     fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                                 />
                             ) : (
                                 <div className="absolute inset-0 flex items-center justify-center text-[var(--color-liturgic-gold)]/30">
