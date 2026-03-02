@@ -18,6 +18,7 @@ interface Product {
     quantity_funded: number;
     category: string;
     image_url: string;
+    slug?: string;
 }
 
 export default function ProductManager({ initialProducts }: { initialProducts: Product[] }) {
@@ -88,9 +89,23 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
                 finalImageUrl = publicUrlData.publicUrl;
             }
 
+            let generatedSlug = '';
+            if (editingProduct?.name_es) {
+                generatedSlug = editingProduct.name_es
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/(^-|-$)+/g, '');
+            }
+            if (!generatedSlug) {
+                generatedSlug = editingProduct?.id || `producto-${Math.random().toString(36).substring(2, 11)}`;
+            }
+
             const payload = {
                 ...editingProduct,
-                image_url: finalImageUrl
+                image_url: finalImageUrl,
+                slug: generatedSlug
             };
 
             // Remove full objects that might cause issues if they exist
