@@ -2,7 +2,8 @@
     "Index": {
         "title": "Wishlist Roberto Allison Coronado",
         "daysLeft": "{days} giorni alla grande notte",
-        "goal": "{funded} di {needed} donati"
+        "goal": "{funded} di {needed} donati",
+        "suggestedSupport": "Supporto suggerito"
     },
     "Modal": {
         "title": "Un Regalo Speciale",

@@ -2,12 +2,15 @@
 import { motion } from 'framer-motion';
 import { Gift } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface Product {
     id: string;
     name: string;
     description: string;
     price_mxn: number;
+    price_usd?: number;
+    price_eur?: number;
     quantity_needed: number;
     quantity_funded: number;
     image_url: string;
@@ -19,11 +22,28 @@ interface WishlistGridProps {
 }
 
 export default function WishlistGrid({ products, onSelectProduct }: WishlistGridProps) {
+    const t = useTranslations('Index');
+    const locale = useLocale();
+    const activeCurrency: string = locale === 'it' ? 'EUR' : 'MXN';
+
+    const getPriceInfo = (product: Product) => {
+        if (activeCurrency === 'EUR') return { amount: product.price_eur || 0, code: 'EUR', symbol: '€' };
+        if (activeCurrency === 'USD') return { amount: product.price_usd || 0, code: 'USD', symbol: '$' };
+        return { amount: product.price_mxn || 0, code: 'MXN', symbol: '$' };
+    };
+
+    const formatter = new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'es-MX', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+    });
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12 px-4 md:px-8 max-w-7xl mx-auto">
             {products.map((product, idx) => {
                 const progress = Math.min(100, Math.round((product.quantity_funded / product.quantity_needed) * 100));
                 const isComplete = product.quantity_funded >= product.quantity_needed;
+                const priceInfo = getPriceInfo(product);
+                const formattedPrice = formatter.format(priceInfo.amount);
 
                 return (
                     <motion.div
@@ -58,6 +78,10 @@ export default function WishlistGrid({ products, onSelectProduct }: WishlistGrid
                         <div className="p-6 flex flex-col flex-grow">
                             <h3 className="text-2xl font-semibold mb-2 text-white">{product.name}</h3>
                             <p className="text-white/60 mb-6 flex-grow">{product.description}</p>
+
+                            <p className="text-white/80 text-sm mb-3">
+                                {t('suggestedSupport')}: <span className="text-[var(--color-liturgic-gold)] font-bold text-lg">{priceInfo.symbol}{formattedPrice} {priceInfo.code}</span>
+                            </p>
 
                             <div className="mb-4">
                                 <div className="flex justify-between text-sm mb-2">
