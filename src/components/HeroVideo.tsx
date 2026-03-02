@@ -6,7 +6,7 @@ export default function HeroVideo() {
     const [daysLeft, setDaysLeft] = useState(0);
 
     useEffect(() => {
-        const target = new Date(process.env.NEXT_PUBLIC_EVENT_DATE || '2026-10-05').getTime();
+        const target = new Date(process.env.NEXT_PUBLIC_EVENT_DATE || '2026-09-05').getTime();
         const updateCountdown = () => {
             const now = new Date().getTime();
             const diff = target - now;
