@@ -22,6 +22,12 @@ export default function GiftModal({ isOpen, onClose, product }: GiftModalProps) 
         e.preventDefault();
         setLoading(true);
         try {
+            // Get current locale from pathname, default to 'es'
+            const currentPath = window.location.pathname;
+            const localeMatch = currentPath.match(/^\/([a-z]{2})/);
+            const locale = localeMatch ? localeMatch[1] : 'es';
+            const baseUrl = window.location.origin;
+
             const res = await fetch('/api/stripe/checkout', {
                 method: 'POST',
                 headers: {
@@ -34,6 +40,8 @@ export default function GiftModal({ isOpen, onClose, product }: GiftModalProps) 
                     dedication,
                     currency,
                     amount: currency === 'MXN' ? product.price_mxn : currency === 'USD' ? product.price_usd : product.price_eur,
+                    successUrl: `${baseUrl}/${locale}/gracias?success=true`,
+                    cancelUrl: `${baseUrl}/${locale}?canceled=true`,
                 }),
             });
             const data = await res.json();

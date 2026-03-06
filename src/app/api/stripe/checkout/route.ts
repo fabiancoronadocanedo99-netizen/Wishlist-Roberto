@@ -5,7 +5,7 @@ import { supabaseAdmin } from '@/lib/supabaseAdmin';
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { productId, donorName, donorEmail, dedication, currency, amount } = body;
+        const { productId, donorName, donorEmail, dedication, currency, amount, successUrl, cancelUrl } = body;
 
         if (!productId || !donorName || !donorEmail || !currency || !amount) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -24,6 +24,12 @@ export async function POST(req: Request) {
 
         // Verify amount roughly matches
         const expectedAmount = currency === 'MXN' ? product.price_mxn : currency === 'USD' ? product.price_usd : product.price_eur;
+
+        const referer = req.headers.get('referer');
+        const origin = req.headers.get('origin') ||
+            (referer ? new URL(referer).origin : null) ||
+            process.env.NEXT_PUBLIC_SITE_URL ||
+            'http://localhost:3000';
 
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
@@ -44,8 +50,8 @@ export async function POST(req: Request) {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/?success=true`,
-            cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/?canceled=true`,
+            success_url: successUrl || `${origin}/es/gracias?success=true`,
+            cancel_url: cancelUrl || `${origin}/?canceled=true`,
             metadata: {
                 productId,
                 donorName,
