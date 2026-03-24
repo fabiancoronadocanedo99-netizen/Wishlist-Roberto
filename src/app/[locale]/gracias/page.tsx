@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabaseServer';
+"import { createClient } from '@/lib/supabaseServer';
 
 export default async function GraciasPage() {
     const supabase = await createClient();
@@ -23,7 +23,7 @@ export default async function GraciasPage() {
                     Muro de Benefactores
                 </h1>
                 <p className="text-center text-white/70 mb-16 max-w-2xl mx-auto">
-                    Un agradecimiento infinito a todos aquellos que con su generosidad hacen posible este camino hacia la ordenación sacerdotal.
+                    Un agradecimiento infinito a todos aquellos que con su generosidad hacen posible este camino hacia la ordenación diaconal.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

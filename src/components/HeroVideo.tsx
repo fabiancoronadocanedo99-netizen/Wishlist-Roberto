@@ -43,7 +43,7 @@ export default function HeroVideo() {
                     transition={{ duration: 0.8 }}
                     className="text-5xl md:text-7xl font-bold text-[var(--color-liturgic-gold)] mb-4 tracking-tight"
                 >
-                    Ordenación Sacerdotal
+                    Ordenación Diaconal
                 </motion.h1>
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -63,6 +63,7 @@ export default function HeroVideo() {
                     <p className="text-xl md:text-2xl font-medium text-white/90 uppercase tracking-widest">
                         Faltan <span className="text-[var(--color-liturgic-gold)] font-bold text-4xl mx-2">{daysLeft}</span> días
                     </p>
+                    <p className="mt-2 text-[var(--color-liturgic-gold)] text-lg tracking-widest font-bold">05/09/2026</p>
                 </motion.div>
             </div>
         </div>
