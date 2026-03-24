@@ -19,11 +19,11 @@ export default function HomeClient({ products }: { products: any[] }) {
             {/* SECCIÓN I: INVITACIÓN A LA MISA */}
             <div className="py-16 max-w-4xl mx-auto px-4 text-center mt-10 relative">
                 <blockquote className="text-xl md:text-2xl italic text-[var(--color-liturgic-gold)] mb-8 font-serif">
-                    "Jesús, fijando en él su mirada, le amó y le dijo: "Ven y sígueme" (Mc 10,21)"
+                    &quot;Jesús, fijando en él su mirada, le amó y le dijo: &quot;Ven y sígueme&quot; (Mc 10,21)&quot;
                 </blockquote>
 
                 <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 text-justify md:text-center">
-                    "Con gran alegría y profunda gratitud por la misericordia de Dios, quisiera compartir contigo un momento muy especial en mi vida. Me gustaría invitarte a la celebración de la misa en la que, por la gracia de Dios, seré ordenado diácono. Tu presencia y tu oración serán un regalo precioso en este día tan especial"
+                    &quot;Con gran alegría y profunda gratitud por la misericordia de Dios, quisiera compartir contigo un momento muy especial en mi vida. Me gustaría invitarte a la celebración de la misa en la que, por la gracia de Dios, seré ordenado diácono. Tu presencia y tu oración serán un regalo precioso en este día tan especial&quot;
                 </p>
 
                 {/* Photo 1 placeholder */}
@@ -52,7 +52,7 @@ export default function HomeClient({ products }: { products: any[] }) {
 
                 <div className="max-w-3xl mx-auto">
                     <p className="text-center text-white/80 mb-10 leading-relaxed text-lg text-justify md:text-center italic">
-                        "En este momento tan especial, muchos me han preguntado de qué manera podrían acompañarme también con un gesto concreto. Con sencillez, quisiera compartir esta pequeña &apos;wishlist&apos; con algunos artículos que me serán de mucha utilidad en mi futuro ministerio. Quienes lo deseen, pueden colaborar apadrinando alguno de ellos. Por supuesto, se trata de una invitación libre y voluntaria. Tu presencia, afecto y oración es para mí el regalo más valioso"
+                        &quot;En este momento tan especial, muchos me han preguntado de qué manera podrían acompañarme también con un gesto concreto. Con sencillez, quisiera compartir esta pequeña &apos;wishlist&apos; con algunos artículos que me serán de mucha utilidad en mi futuro ministerio. Quienes lo deseen, pueden colaborar apadrinando alguno de ellos. Por supuesto, se trata de una invitación libre y voluntaria. Tu presencia, afecto y oración es para mí el regalo más valioso&quot;
                     </p>
                 </div>
 
@@ -91,7 +91,7 @@ export default function HomeClient({ products }: { products: any[] }) {
                 </div>
 
                 <p className="text-white/90 text-xl md:text-2xl leading-relaxed italic max-w-2xl mx-auto font-serif">
-                    "Y les pido, por último, una oración a estos grandes héroes que me han acompañado durante estos 19 años: ¡mi familia!"
+                    &quot;Y les pido, por último, una oración a estos grandes héroes que me han acompañado durante estos 19 años: ¡mi familia!&quot;
                 </p>
             </div>
 

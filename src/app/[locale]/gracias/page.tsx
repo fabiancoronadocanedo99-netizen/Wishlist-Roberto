@@ -1,4 +1,4 @@
-"import { createClient } from '@/lib/supabaseServer';
+import { createClient } from '@/lib/supabaseServer';
 
 export default async function GraciasPage() {
     const supabase = await createClient();
