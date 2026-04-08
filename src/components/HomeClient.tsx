@@ -31,7 +31,7 @@ export default function HomeClient({ products }: { products: any[] }) {
                     <img
                         src="/foto_1.jpg"
                         alt="Ordenación Diaconal"
-                        className="w-full max-w-2xl mx-auto rounded-3xl shadow-2xl border-2 border-[var(--color-liturgic-gold)]/50 object-cover aspect-video md:aspect-[4/3] bg-black/50"
+                        className="w-full max-w-2xl mx-auto rounded-3xl shadow-2xl border-2 border-[var(--color-liturgic-gold)]/50 object-cover aspect-[4/3] bg-black/50"
                     />
                 </div>
 
@@ -86,7 +86,7 @@ export default function HomeClient({ products }: { products: any[] }) {
                     <img
                         src="/foto_2.jpg"
                         alt="Mi familia"
-                        className="w-full max-w-2xl mx-auto rounded-3xl shadow-2xl border-2 border-[var(--color-liturgic-gold)]/50 object-cover aspect-video md:aspect-[4/3] bg-black/50"
+                        className="w-full max-w-2xl mx-auto rounded-3xl shadow-2xl border-2 border-[var(--color-liturgic-gold)]/50 object-cover aspect-[4/3] bg-black/50"
                     />
                 </div>
 
